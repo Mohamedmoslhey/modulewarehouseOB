@@ -1,0 +1,745 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD Xhtml 1.0 Transitional//EN" "http://www.w3.org/tr/xhtml1/Dtd/xhtml1-transitional.dtd">
+<!--
+ *************************************************************************
+ * The contents of this file are subject to the Openbravo  Public  License
+ * Version  1.0  (the  "License"),  being   the  Mozilla   Public  License
+ * Version 1.1  with a permitted attribution clause; you may not  use this
+ * file except in compliance with the License. You  may  obtain  a copy of
+ * the License at http://www.openbravo.com/legal/license.html
+ * Software distributed under the License  is  distributed  on  an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
+ * License for the specific  language  governing  rights  and  limitations
+ * under the License.
+ * The Original Code is Openbravo ERP.
+ * The Initial Developer of the Original Code is Openbravo SLU
+ * All portions are Copyright (C) 2001-2010 Openbravo SLU
+ * All Rights Reserved.
+ * Contributor(s):  ______________________________________.
+ ************************************************************************
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>تقرير المبيعات</title>
+
+<link rel="shortcut icon" href="../../../../../web/images/favicon.ico"
+    type="image/x-icon" />
+<link rel="stylesheet" type="text/css"
+    href="../../../../../web/skins/Default/Openbravo_ERP_250.css"
+    id="paramCSS" />
+    <meta name="description" content="" />
+    <meta name="author" content="Christoph Oberhofer" />
+
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href="../../../../../web/css/styles.css" />
+<style>
+ th {
+   resize:horizontal;
+    overflow: auto;
+}
+
+label.cameraButton {
+  display: inline-block;
+  margin: 2em 0;
+
+  /* Styles to make it look like a button */
+  padding:10px 250px 15px 250px;
+  border: 2px solid #666;
+  text-align:center;
+  border-color: #EEE #CCC #CCC #EEE;
+  background-color: #DDD;
+}
+
+/* Look like a clicked/depressed button */
+label.cameraButton:active {
+  border-color: #CCC #EEE #EEE #CCC;
+}
+
+/* This is the part that actually hides the 'Choose file' text box for camera inputs */
+label.cameraButton input[accept="image/*"] {
+  display: none;
+}
+
+body{
+background-color:#888
+}
+.containerT{
+width:672px;
+background-color:#fff;
+
+margin:auto;
+overflow: hidden;
+display: flex;
+}
+.block_containerA{
+margin:auto;
+}
+
+.block_containerA .labela{
+width:400px;
+ float:left; /* add this */
+ padding:10px;
+ padding-top:50px;
+ padding-left:70px;
+ padding-bottom:50px;
+}
+
+.block_containerA .labelb{
+width:372px;
+padding:10px;
+ overflow: hidden;
+ padding-top:50px;
+  padding-bottom:50px;
+}
+
+ 
+  .block_containerB {
+    display: flex;
+    justify-content: center;
+    margin: 30px 10px;
+}
+
+.block_containerB .wrapper{
+padding:5em;
+}
+
+
+
+
+/* .block_containerB .wrapper .buttonj .button {
+  background-color: #808080;
+     border-color: #15c32d;
+    /* border: none; 
+    color: #161716;
+  padding: 30px 45px;
+  text-align: center;
+  width:400;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 30px;
+margin:auto;
+  cursor: pointer;
+} */
+.block_containerB .wrapper .buttonjr .button {
+  background-color: #808080;
+     border-color: #15c32d;
+    /* border: none; */
+    color: #161716;
+     width:400;
+  padding: 30px 45px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 30px;
+ margin:auto;
+  cursor: pointer;
+}
+ .class4{
+ 
+ maxlength="20" ;
+ padding-right: 10%;
+ }
+ 
+ 
+  .block_containerC {
+
+    justify-content: left;
+    margin: auto;
+}
+
+.block_containerC .botocontA  {
+ 
+  padding: 30px ;
+  
+}
+
+.block_containerC .botocontA  .ButtonLink{
+ background-color: #008000;
+     border-color: #15c32d;
+    /* border: none; */
+    color: #161716;
+  text-align: center;
+  padding: 30px ;
+  width:400;
+  height:70;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 30px;
+margin:auto;
+  cursor: pointer;
+}
+.block_containerC .botocontB  {
+ 
+  padding: 30px ;
+ 
+}
+
+.block_containerC .botocontB  .ButtonLink{
+ background-color: #008000;
+     border-color: #15c32d;
+    /* border: none; */
+    color: #161716;
+  text-align: center;
+  padding: 30px ;
+  width:400;
+  height:70;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 30px;
+margin:auto;
+  cursor: pointer;
+}
+
+
+.block_containerC .botocontC  {
+ 
+  padding: 30px ;
+ 
+}
+
+.block_containerC .botocontC  .ButtonLink{
+ background-color: #008000;
+     border-color: #15c32d;
+    /* border: none; */
+    color: #161716;
+  text-align: center;
+  padding: 30px ;
+  width:400;
+  height:70;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 30px;
+margin:auto;
+  cursor: pointer;
+}
+
+
+.block_containerC .botocontD  {
+ 
+  padding: 30px ;
+ 
+}
+
+.block_containerC .botocontD  .ButtonLink{
+ background-color: #008000;
+     border-color: #15c32d;
+    /* border: none; */
+    color: #161716;
+  text-align: center;
+  padding: 30px ;
+  width:400;
+  height:70;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 30px;
+margin:auto;
+  cursor: pointer;
+}
+</style>
+
+<script language="JavaScript" type="text/javascript" id="paramDirectory">
+    var baseDirectory = "../../../../../web/";
+</script>
+<script language="JavaScript" src="../../../../../web/js/messages.js"
+    type="text/javascript">
+    
+</script>
+<script language="JavaScript" src="../utility/DynamicJS.js"
+    type="text/javascript"></script>
+<script language="JavaScript" type="text/javascript" id="paramLanguage">
+    var defaultLang = "en_US";
+</script>
+
+
+<script language="JavaScript" src="../../../../../web/js/shortcuts.js"
+    type="text/javascript"></script>
+<script language="JavaScript" src="../../../../../web/js/utils.js"
+    type="text/javascript"></script>
+<script language="JavaScript"
+    src="../../../../../web/js/windowKeyboard.js" type="text/javascript"></script>
+<script language="JavaScript" src="../../../../../web/js/searchs.js"
+    type="text/javascript"></script>
+<script language="JavaScript" src="../../../../../web/js/ajax.js"
+    type="text/javascript"></script>
+<script language="JavaScript"
+    src="../../../../../web/js/default/MessageBox.js"
+    type="text/javascript"></script>
+<script language="JavaScript" src="../../../../../web/js/messages.js"
+    type="text/javascript"></script>
+<script language="JavaScript" src="../utility/DynamicJS.js"
+    type="text/javascript"></script>
+<script language="JavaScript"
+    src="../../../../../web/../org.openbravo.client.kernel/OBCLKER_Kernel/StaticResources"
+    type="text/javascript"></script>
+<script language="JavaScript"
+    src="../../../../../web/org.openbravo.userinterface.selector/js/classic-skin-variable.js"
+    type="text/javascript"></script>
+<script language="JavaScript"
+    src="../../../../../web/js/jscalendar/calendar.js"
+    type="text/javascript"></script>
+<script language="JavaScript"
+    src="../../../../../web/js/jscalendar/lang/calendar-es.js"
+    type="text/javascript" id="fieldCalendar"></script>
+<script language="JavaScript"
+    src="../../../../../web/js/default/DateTextBox.js"
+    type="text/javascript"></script>
+<script language="JavaScript" src="../../../../../web/js/dojoConfig.js"
+    type="text/javascript"></script>
+<script language="JavaScript" src="../../../../../web/js/dojo/dojo.js"
+    type="text/javascript"></script>
+<script language="JavaScript" src="../../../../../web/js/appStatus.js"
+    type="text/javascript"></script>
+<script type="text/javascript">
+    dojo.hostenv.writeIncludes(); //makes debugging in Venkman possible
+</script>
+
+<script language="JavaScript" type="text/javascript">
+    function imprimir() {
+        if (validate()) {
+            openPDFFiltered("ReportProductionPDF.pdf?Command=FIND", "PDF");
+        }
+        return true;
+    }
+    function validate() {
+
+        return true;
+    }
+</script>
+<script language="JavaScript" type="text/javascript">
+    function onLoadDo() {
+        this.windowTables = new Array(new windowTableId('client', 'buttonPDF'));
+        setWindowTableParentElement();
+        this.tabsTables = new Array(new tabTableId('tdtopTabs'));
+        setTabTableParentElement();
+        enableShortcuts('edition');
+        setBrowserAutoComplete(false);
+
+        xx();
+        resizeArea();
+        updateMenuIcon('buttonMenu');
+
+        setWindowElementFocus('firstElement');
+    }
+
+    function onResizeDo() {
+        resizeArea();
+    }
+</script>
+</head>
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"
+    onload="onLoadDo();" onresize="onResizeDo();">
+    <form method="post"
+        action="com.ibox.paper.ad_forms/SalesScanner.html"
+        name="frmMain" enctype='multipart/form-data'>
+        <input type="hidden" name="Command"></input>
+        <table height="100%" border="0" cellpadding="0" cellspacing="0"
+            id="main">
+            <tr>
+                <td valign="top" id="tdleftTabs"></td>
+                <td valign="top">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0"
+                        class="Main_ContentPane_Left">
+                        <tr>
+                            <td class="Main_NavBar_bg_left" id="tdleftSeparator"></td>
+                        </tr>
+                        <tr>
+                            <td class="Main_ToolBar_bg_left" valign="top"></td>
+                        </tr>
+                        <tr>
+                            <td class="Main_Client_bg_left"></td>
+                        </tr>
+                        <tr>
+                            <td class="Main_Bottom_bg_left"></td>
+                        </tr>
+                    </table>
+                </td>
+                <td valign="top">
+                    <div class="Main_ContentPane_NavBar" id="tdtopButtons"></div>
+                    <div class="Main_ContentPane_ToolBar" id="paramToolBar"></div>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0"
+                        class="Main_ContentPane_TabPane" id="tdtopTabs">
+                        <tr id="paramParentTabContainer"></tr>
+                        <tr id="paramMainTabContainer"></tr>
+                        <tr id="paramChildTabContainer"></tr>
+                    </table>
+                    <div class="Main_ContentPane_Client"
+                        style="overflow: auto; display: none;" id="client">
+                        <table class="dojoTabContainer" border="0" cellpadding="0"
+                            cellspacing="0" width="100%" summary="">
+                            <tr>
+                                <td>
+                                    <table class="dojoTabPaneWrapper" border="0" cellpadding="0"
+                                        cellspacing="0" width="100%" summary="">
+                                        <tr>
+                                            <td>
+                                                <!-- MessageBox -->
+
+                                                <table cellpadding="0" cellspacing="0" id="messageBoxID"
+                                                    class="MessageBoxyy">
+                                                    <tbody>
+                                                        <tr class="MessageBox_TopMargin">
+                                                            <td class="MessageBox_LeftMargin"></td>
+                                                            <td></td>
+                                                            <td class="MessageBox_RightMargin"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="MessageBox_LeftMargin"></td>
+                                                            <td>
+
+                                                                <table cellpadding="0" cellspacing="0"
+                                                                    class="MessageBox_Container">
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td class="MessageBox_LeftTrans">
+                                                                                <table style="width: 100%; height: 100%"
+                                                                                    cellpadding="0" cellspacing="0">
+                                                                                    <tbody>
+                                                                                        <tr>
+                                                                                            <td class="MessageBox_TopLeft"></td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td class="MessageBox_Left"></td>
+                                                                                        </tr>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </td>
+                                                                            <td class="MessageBox_bg">
+
+                                                                                <table class="MessageBox_Top">
+                                                                                    <tbody>
+                                                                                        <tr>
+                                                                                            <td><span>
+                                                                                                    <table cellpadding="0" cellspacing="0"
+                                                                                                        class="MessageBox_Body_ContentCell">
+                                                                                                        <tbody>
+                                                                                                            <tr>
+                                                                                                                <td class="MessageBox_Icon_ContentCell">
+                                                                                                                    <div class="MessageBox_Icon"></div>
+                                                                                                                </td>
+                                                                                                                <td style="vertical-align: top;"
+                                                                                                                    id="messageBoxIDContent"><span>
+                                                                                                                        <div class="MessageBox_TextTitle"
+                                                                                                                            id="messageBoxIDTitle">xxInfo:
+                                                                                                                            AccessTableWithNoView</div>
+                                                                                                                        <div class="MessageBox_TextDescription"
+                                                                                                                            id="messageBoxIDMessage">xxThe
+                                                                                                                            current information is empty.</div>
+                                                                                                                        <div class="MessageBox_TextSeparator"></div>
+                                                                                                                </span></td>
+                                                                                                            </tr>
+                                                                                                        </tbody>
+                                                                                                    </table>
+                                                                                            </span></td>
+                                                                                        </tr>
+                                                                                    </tbody>
+                                                                                </table>
+
+                                                                            </td>
+                                                                            <td class="MessageBox_RightTrans">
+                                                                                <table style="width: 100%; height: 100%"
+                                                                                    cellpadding="0" cellspacing="0">
+                                                                                    <tbody>
+                                                                                        <tr>
+                                                                                            <td class="MessageBox_TopRight"></td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td class="MessageBox_Right"></td>
+                                                                                        </tr>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td rowspan="2" class="MessageBox_BottomLeft"></td>
+                                                                            <td class="MessageBox_BottomTrans MessageBox_bg">
+                                                                            </td>
+                                                                            <td rowspan="2" class="MessageBox_BottomRight">
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td class="MessageBox_Bottom"></td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+
+                                                            </td>
+                                                            <td class="MessageBox_RightMargin"></td>
+                                                        </tr>
+                                                        <tr class="MessageBox_BottomMargin">
+                                                            <td class="MessageBox_LeftMargin"></td>
+                                                            <td></td>
+                                                            <td class="MessageBox_RightMargin"></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table> <!-- USER CONTROLS -->
+                                                <table class="Main_Client_TableEdition">
+                                                    <tr>
+                                                        <td class="TableEdition_OneCell_width"></td>
+                                                        <td class="TableEdition_OneCell_width"></td>
+                                                        <td class="TableEdition_OneCell_width"></td>
+                                                        <td class="TableEdition_OneCell_width"></td>
+                                                        <td class="TableEdition_OneCell_width"></td>
+                                                        <td class="TableEdition_OneCell_width"></td>
+                                                    </tr>
+                                                  
+
+            <!--Filters-->
+         <div class="block_containerA">
+          <div class="containerT">
+  <div class="labela" >
+ 
+<LABEL >ادخل كود البكرة هنا</LABEL>
+<br>
+  <input class="class3" type="text" name="inpcHentry" value="" id="paramOrgazId" maxlength="20" style="padding-right: 10%" ></input>
+  </div>
+  
+  <div class="labelb" >
+ 
+ <LABEL >رقم اذن الصرف</LABEL>
+ <br>
+   <input class="class4" type="text" name="inpfDoc" value="" id="paramfDocnoId" maxlength="20" style="padding-right: 10%" ></input>  
+    </div> 
+</div>
+ </div>
+ <table cellspacing="0" cellpadding="0" width="100%" style="text-align:-moz-center;_text-align:center;">
+    <tr>
+ 
+ <td>
+      <div class="Popup_ContentPane_Client" style="overflow: auto;">
+        <table cellspacing="0" cellpadding="0" width="100%" class="DataGrid_Header_Table DataGrid_Body_Table">
+          <tr class="Popup_Client_Selector_DataGrid_HeaderRow"> 
+           
+             <th class="DataGrid_Header_Cell" width="91">كود البكرة</th>
+            <th class="DataGrid_Header_Cell" width="100">نوع المنتج</th>
+            <th class="DataGrid_Header_Cell" width="91">درجة الجودة</th>
+            <th class="DataGrid_Header_Cell" width="91">جى اس ام</th>
+           <th class="DataGrid_Header_Cell" width="91">عرض البكرة</th>
+            <th class="DataGrid_Header_Cell" width="91">قطر البكرة</th>
+           <th class="DataGrid_Header_Cell" width="91">الماكينة</th>
+           <th class="DataGrid_Header_Cell" width="150">العميل</th>
+           <th class="DataGrid_Header_Cell" width="91">وزن البكرة</th>
+          <th class="DataGrid_Header_Cell" width="91">ملاحظات</th>
+         
+          
+          </tr>
+          <div id="sectionDetail"> 
+            <tr class="DataGrid_Body_Row DataGrid_Body_Row_xx" id="funcEvenOddRow"> 
+             
+               <td class="DataGrid_Body_Cell" id="fieldJumbocode"></td>
+            <td class="DataGrid_Body_Cell" id="fieldProducttype"></td>
+            <td class="DataGrid_Body_Cell" id="fieldQualitydegree"></td>
+             <td class="DataGrid_Body_Cell" id="fieldGSM"></td>
+            <td class="DataGrid_Body_Cell" id="fieldBakaraWidth"></td>
+            <td class="DataGrid_Body_Cell" id="fieldBakaraqotr"></td>
+             <td class="DataGrid_Body_Cell" id="fieldMachine"></td>
+            <td class="DataGrid_Body_Cell" id="fieldClientpaper"></td>
+            <td class="DataGrid_Body_Cell" id="fieldBakaraweigth"></td>
+             <td class="DataGrid_Body_Cell" id="fieldPapernotes"></td>
+           
+           
+          
+            </tr>
+          </div>
+        </table>
+       </div>
+     </td>
+    </tr>
+ </table>
+<div class="block_containerB">
+  <div class="containerT">
+<main class="wrapper" >
+
+  
+    <section id="container" class="container">
+    
+        <div class="controls">
+            <fieldset class="input-group">
+                <button class="stop">Stop</button>
+            </fieldset>
+            <fieldset class="reader-config-group">
+                <label>
+                    <span>Barcode-Type</span>
+                    <select name="decoder_readers">
+                        <option value="code_128" selected="selected">Code 128</option>
+                        <option value="code_39">Code 39</option>
+                        <option value="code_39_vin">Code 39 VIN</option>
+                        <option value="ean">EAN</option>
+                        <option value="ean_extended">EAN-extended</option>
+                        <option value="ean_8">EAN-8</option>
+                        <option value="upc">UPC</option>
+                        <option value="upc_e">UPC-E</option>
+                        <option value="codabar">Codabar</option>
+                        <option value="i2of5">Interleaved 2 of 5</option>
+                        <option value="2of5">Standard 2 of 5</option>
+                        <option value="code_93">Code 93</option>
+                    </select>
+                </label>
+                <label>
+                    <span>Resolution (width)</span>
+                    <select name="input-stream_constraints">
+                        <option value="320x240">320px</option>
+                        <option selected="selected" value="640x480">640px</option>
+                        <option value="800x600">800px</option>
+                        <option value="1280x720">1280px</option>
+                        <option value="1600x960">1600px</option>
+                        <option value="1920x1080">1920px</option>
+                    </select>
+                </label>
+                <label>
+                    <span>Patch-Size</span>
+                    <select name="locator_patch-size">
+                        <option value="x-small">x-small</option>
+                        <option value="small">small</option>
+                        <option selected="selected" value="medium">medium</option>
+                        <option value="large">large</option>
+                        <option value="x-large">x-large</option>
+                    </select>
+                </label>
+                <label>
+                    <span>Half-Sample</span>
+                    <input type="checkbox" checked="checked" name="locator_half-sample" />
+                </label>
+                <label>
+                    <span>Workers</span>
+                    <select name="numOfWorkers">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option selected="selected" value="4">4</option>
+                        <option value="8">8</option>
+                    </select>
+                </label>
+                <label>
+                    <span>Camera</span>
+                    <select name="input-stream_constraints" id="deviceSelection">
+                    </select>
+                </label>
+                <label style="display: none">
+                    <span>Zoom</span>
+                    <select name="settings_zoom"></select>
+                </label>
+                <label style="display: none">
+                    <span>Torch</span>
+                    <input type="checkbox" name="settings_torch" />
+                </label>
+            </fieldset>
+        </div>
+      <div id="result_strip">
+        <ul class="thumbnails"></ul>
+        <ul id="cansd" class="collector"></ul>
+      </div>
+      <div id="mancode">
+     <input class="class4" type="text" name="inpcx" value="" id="paramx"  readonly></input>
+      </div>
+    
+      <div id="interactive" class="viewport"></div>
+    </section>
+       </main>  
+
+    <script src="../../../../../web/js/vendor/jquery-1.9.0.min.js" type="text/javascript"></script>
+ <script src="../../../../../web/js/adapter.js" type="text/javascript"></script>
+    <script src="../../../../../web/js/quagga.js" type="text/javascript"></script>
+    <script src="../../../../../web/js/live_w_locator.js" type="text/javascript"></script>
+  </div>
+
+ </div>
+        
+</div>
+<div class="containerT">
+ <div class="block_containerC">
+ 
+ 
+        
+                                                            <div class="botocontA">
+                                                               <a class="ButtonLink" id="buttonPDF"
+        onclick="submitCommandForm('ADDBARCODEO', false, null, 'SalesScanner.html', '_self', null, false);return false;"> أضافة بكرة  </a>  
+                                                   
+                                                 </div> 
+                                                          
+
+
+
+
+                                                       
+                                                               <div class="botocontB">
+        <a class="ButtonLink" id="buttonPDF"
+        onclick="submitCommandForm('REMOVEBARCODEO', false, null, 'SalesScanner.html', '_self', null, false);return false;"> أزالة بكرة </a>  
+                                                                       
+            
+
+                                                 </div>
+                                                 
+                                                  <div class="botocontC">
+        <a class="ButtonLink" id="buttonPDF"
+        onclick="submitCommandForm('PDFRO', false, null, 'SalesScanner.html', '_self', null, false);return false;"> طباعة أذن الصرف </a>  
+                                                                       
+            
+
+                                                 </div>
+                                                 
+                                                               <div class="botocontD">
+        <a class="ButtonLink" id="buttonPDF"
+        onclick="submitCommandForm('UPDATERO', false, null, 'SalesScanner.html', '_self', null, false);return false;"> اتمام عملية البيع </a>  
+                                                                       
+            
+
+                                                 </div>
+                                                            
+      
+                                                
+  
+</div>
+</div>
+
+
+                                                    <!-- USER CONTROLS -->
+                                                    </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    </div>
+
+
+                                                    <!-- USER CONTROLS -->
+                                                    </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    </div>
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0"
+                                        class="Menu_ContentPane_Bottom" id="tdbottomSeparator">
+                                        <tr>
+                                            <td class="Main_Bottom_bg"><img
+                                                src="../../../../../web/images/blank.gif" border="0"></td>
+                                                
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td valign="top">
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0"
+                                        class="Main_ContentPane_Right" id="tdrightSeparator">
+                                        <tr>
+                                            <td class="Main_NavBar_bg_right"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="Main_ToolBar_bg_right" valign="top"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="Main_Client_bg_right"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="Main_Bottom_bg_right"></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                        </form>
+</body>
+</html>
+

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SqlClass name="BatchSetProductCategoryData" package="org.openbravo.howtos.ad_forms">
+  <SqlClassComment>
+    This class is used to describe all data operations required by the controller (select, update, delete or insert).
+    At compile time, a BatchSetProductCategoryData.java class is generated with the same static methods as the ones 
+    defined here. By having it in the same package as the controller, the methods can be directly called.
+
+    In the future, the DAL (Data Access Layer) should replace the need for this file which at this point makes 
+    the servlet database dependant (Postgres/Oracle).
+  </SqlClassComment>
+  <SqlMethod name="select" type="preparedStatement" return="multiple">
+    <SqlMethodComment>Retrieve the list of products according to the filters passed</SqlMethodComment>
+    <Sql>
+    <![CDATA[
+      SELECT p.M_Product_ID AS mProductId, o.Name AS adorgname, p.value as searchkey, p.name AS name, pc.name AS categoryname, bp.name AS bpartnername,
+      COALESCE(ltrl.Name, l.Name) AS producttype, p.ispurchased AS purchased, p.issold AS sold
+        FROM M_Product p LEFT JOIN C_BPartner bp ON p.C_BPartner_Id=bp.C_BPartner_Id, AD_Org o, M_Product_Category pc, AD_Ref_List l left join AD_Ref_List_trl ltrl on l.AD_Ref_List_ID=ltrl.AD_Ref_List_ID and ltrl.ad_language=?
+        WHERE p.AD_Org_ID=o.AD_Org_ID
+          AND p.M_Product_Category_Id=pc.M_Product_Category_Id
+          AND l.value = p.producttype
+          AND AD_Reference_ID='270'
+          AND p.ad_client_id in ('1')
+          AND p.ad_org_id in ('1')
+          AND 1=1
+          AND 2=2 AND p.ad_org_id in ('1')
+          ORDER BY p.Name
+      ]]></Sql>
+    <Field name="rownum" value="count"/>
+    <Parameter name="language"/>
+    <Parameter name="adUserClient" type="replace" optional="true" after="AND p.ad_client_id in (" text="'1'"/>
+    <Parameter name="adUserOrg" type="replace" optional="true" after="AND p.ad_org_id in (" text="'1'"/>
+    <Parameter name="parBPartner" optional="true" after="AND 1=1">AND p.C_BPartner_ID= ?</Parameter>
+    <Parameter name="parProductCategory" optional="true" after="AND 1=1">AND p.M_Product_Category_ID= ?</Parameter>
+    <Parameter name="parProductType" optional="true" after="AND 1=1">AND p.ProductType= ?</Parameter>
+    <Parameter name="parPurchased" optional="true" after="AND 1=1">AND p.IsPurchased='Y'</Parameter>
+    <Parameter name="parSold" optional="true" after="AND 1=1">AND p.IsSold='Y'</Parameter>
+    <Parameter name="adOrgId" optional="true" type="replace" after="AND 2=2 AND p.ad_org_id in (" text="'1'"/>
+  </SqlMethod>
+
+  <SqlMethod name="set" type="constant" return="multiple">
+      <SqlMethodComment>Retrieve an empty dataset (as opposed to having a null one)</SqlMethodComment>
+      <Sql></Sql>
+  </SqlMethod>
+
+  <SqlMethod name="bPartnerDescription" type="preparedStatement" return="String" default="">
+    <SqlMethodComment>Used to retrieve the human friendly label for a Business Partner using the ID</SqlMethodComment>
+    <Sql>
+    SELECT NAME FROM C_BPARTNER 
+    WHERE C_BPARTNER_ID = ?
+    </Sql>
+    <Parameter name="cBpartnerId"/>
+  </SqlMethod>
+
+  <SqlMethod name="treeOrg" type="preparedStatement" return="string">
+    <SqlMethodComment>Get an organization's children</SqlMethodComment>
+    <Sql>
+        SELECT AD_TREE_ORG_ID FROM AD_CLIENTINFO
+        WHERE AD_CLIENT_ID = ?
+    </Sql>
+    <Parameter name="client"/>
+  </SqlMethod>
+
+  <SqlMethod name="process" type="preparedStatement" return="rowCount">
+    <SqlMethodComment>Set a new product category to products</SqlMethodComment>
+    <Sql>
+    <![CDATA[
+      UPDATE M_Product SET M_Product_Category_Id=?
+      WHERE 1=1
+      ]]></Sql>
+    <Parameter name="mProductCategoryId"/>
+    <Parameter name="productIds" optional="true" type="argument" after="WHERE 1=1" text="AND M_Product_ID IN"/>
+  </SqlMethod>
+
+</SqlClass>

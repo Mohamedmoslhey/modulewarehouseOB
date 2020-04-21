@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER PAPER_OPENING_BALANCE_TRG1">
+    <trigger name="PAPER_OPENING_BALANCE_TRG1" table="PAPER_OPENING_BALANCE" fires="before" insert="true" update="false" delete="false" foreach="row">
+      <body><![CDATA[
+
+BEGIN
+
+IF AD_isTriggerEnabled()='N' THEN RETURN;
+    END IF; 
+
+
+  if(:new.roll_code In(select roll_code from paper_opening_balance )) then 
+
+    raise exception '%','@لقد ادخلت هذا الكود سابقا !!!@';
+
+  end if;
+
+ 
+ END PAPER_OPENING_BALANCE_TRG1
+]]></body>
+    </trigger>
+  </database>

@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER PAPER_M_MOVEMENTLINE_TRG">
+    <trigger name="PAPER_M_MOVEMENTLINE_TRG" table="M_MOVEMENTLINE" fires="after" insert="true" update="false" delete="false" foreach="row">
+      <body><![CDATA[
+BEGIN
+  IF AD_isTriggerEnabled()='Y' THEN IF DELETING THEN IF UPDATING THEN RETURN OLD; ELSE RETURN NEW; END IF; 
+  END IF;
+   END IF;
+  IF (INSERTING) THEN
+   IF (:NEW.M_PRODUCT_ID IS NOT NULL) THEN
+	UPDATE public.m_movementline SET
+	 em_paper_jumbo_code = (SELECT bakaracode FROM paper_quality WHERE bakaracode = (SELECT name FROM M_PRODUCT WHERE M_Product_ID =:NEW.M_PRODUCT_ID)),	
+	 em_paper_product_type = (SELECT producttype FROM paper_quality WHERE bakaracode = (SELECT name FROM M_PRODUCT WHERE M_Product_ID =:NEW.M_PRODUCT_ID)),
+	 em_paper_quality_degree = (SELECT paper_quality_degree_id FROM paper_quality WHERE bakaracode = (SELECT name FROM M_PRODUCT WHERE M_Product_ID =:NEW.M_PRODUCT_ID)),
+	 em_paper_gsm = (SELECT gsm FROM paper_quality WHERE bakaracode = (SELECT name FROM M_PRODUCT WHERE M_Product_ID =:NEW.M_PRODUCT_ID)),
+	 em_paper_bakarawidth = (SELECT bakarawidth FROM paper_quality WHERE bakaracode = (SELECT name FROM M_PRODUCT WHERE M_Product_ID =:NEW.M_PRODUCT_ID)),
+	 em_paper_bakaraqotr = (SELECT bakaraqotr FROM paper_quality WHERE bakaracode = (SELECT name FROM M_PRODUCT WHERE M_Product_ID =:NEW.M_PRODUCT_ID)),
+	 em_paper_machine = (SELECT paper_machine_id FROM paper_quality WHERE bakaracode = (SELECT name FROM M_PRODUCT WHERE M_Product_ID =:NEW.M_PRODUCT_ID)),
+	 em_paper_client = (SELECT c_bpartner_id FROM paper_quality WHERE bakaracode = (SELECT name FROM M_PRODUCT WHERE M_Product_ID =:NEW.M_PRODUCT_ID)),
+	 em_paper_bakawieght = (SELECT bakaraweight FROM paper_quality WHERE bakaracode = (SELECT name FROM M_PRODUCT WHERE M_Product_ID =:NEW.M_PRODUCT_ID)),
+	 em_paper_notes = (SELECT notes FROM paper_quality WHERE bakaracode = (SELECT name FROM M_PRODUCT WHERE M_Product_ID =:NEW.M_PRODUCT_ID))
+	WHERE m_movementline_id = :NEW.m_movementline_id;	
+	-- RETURN NEW;
+   END IF;
+  END IF;
+END PAPER_M_MOVEMENTLINE_TRG
+]]></body>
+    </trigger>
+  </database>

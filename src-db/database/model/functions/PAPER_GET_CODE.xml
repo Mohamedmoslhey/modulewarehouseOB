@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION PAPER_GET_CODE">
+    <function name="PAPER_GET_CODE" type="VARCHAR">
+      <body><![CDATA[new_year character varying(2) = (SELECT to_char( now(),'YY'));
+   new_doy integer = (select to_char((SELECT EXTRACT(DOY FROM   now())), '000'));
+   new_Hour integer = (SELECT EXTRACT(HOUR FROM now()));
+   new_Minute integer = (SELECT EXTRACT(MINUTE FROM now()));
+   cur_year character varying(2) = (SELECT currentyear FROM paper_pqsequence);
+   cur_doy character varying(3) = (SELECT  dayofyear FROM paper_pqsequence);
+   cur_dailyserial character varying(3) = (SELECT dailyserial FROM paper_pqsequence);
+   final_code character varying(10);
+
+BEGIN 
+  IF
+	(new_Hour >= 0 AND new_Hour < 8) AND (new_Minute >=0) 
+
+  THEN 
+	new_doy = new_doy-1;
+
+END IF;
+
+	IF new_year != cur_year 
+	
+	THEN 
+	BEGIN
+if(new_doy>=100) then
+		final_code = new_year || new_doy || '1';
+		UPDATE paper_pqsequence SET currentyear = new_year, dayofyear = new_doy, dailyserial = '1';
+elsif(new_doy>=10) then
+		final_code = new_year  ||'0'||new_doy || '1';
+		UPDATE paper_pqsequence SET currentyear = new_year, dayofyear = new_doy, dailyserial = '1';
+else
+final_code = new_year || '00'||new_doy || '1';
+		UPDATE paper_pqsequence SET currentyear = new_year, dayofyear = new_doy, dailyserial = '1';
+end if;
+	END;
+	ELSIF new_doy::character varying(3) != cur_doy
+	THEN 
+	BEGIN
+if(new_doy>=100) then
+		final_code = cur_year || new_doy || '1';
+		UPDATE paper_pqsequence SET currentyear = cur_year, dayofyear = new_doy, dailyserial = '1';
+elsif(new_doy>=10) then
+final_code = cur_year || '0'||new_doy || '1';
+		UPDATE paper_pqsequence SET currentyear = cur_year, dayofyear = new_doy, dailyserial = '1';
+else
+final_code = cur_year || '00'||new_doy || '1';
+		UPDATE paper_pqsequence SET currentyear = cur_year, dayofyear = new_doy, dailyserial = '1';
+end if;
+	END;
+	ELSE 
+	BEGIN
+if(cur_doy::int>=100) then--ok pass test
+		final_code = cur_year || cur_doy::int || cur_dailyserial::int+1;
+		UPDATE paper_pqsequence SET currentyear = cur_year, dayofyear = cur_doy::int, dailyserial = cur_dailyserial::int+1;
+elsif( cur_doy::int>=10 ) then
+final_code = cur_year || '0'||cur_doy::int  ||cur_dailyserial::int+1;
+		UPDATE paper_pqsequence SET currentyear = cur_year, dayofyear = cur_doy::int, dailyserial = cur_dailyserial::int+1;
+else
+final_code = cur_year || '00'||cur_doy::int || cur_dailyserial::int+1;
+		UPDATE paper_pqsequence SET currentyear = cur_year, dayofyear = cur_doy::int, dailyserial = cur_dailyserial::int+1;
+end if;
+	END;
+	END IF;
+	RETURN final_code;
+END PAPER_GET_CODE
+]]></body>
+    </function>
+  </database>

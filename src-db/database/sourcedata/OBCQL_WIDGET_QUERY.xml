@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+<!--9BE67BA6E3E042B6B1D8E4142021B502--><OBCQL_WIDGET_QUERY>
+<!--9BE67BA6E3E042B6B1D8E4142021B502-->  <OBCQL_WIDGET_QUERY_ID><![CDATA[9BE67BA6E3E042B6B1D8E4142021B502]]></OBCQL_WIDGET_QUERY_ID>
+<!--9BE67BA6E3E042B6B1D8E4142021B502-->  <AD_CLIENT_ID><![CDATA[0]]></AD_CLIENT_ID>
+<!--9BE67BA6E3E042B6B1D8E4142021B502-->  <AD_ORG_ID><![CDATA[0]]></AD_ORG_ID>
+<!--9BE67BA6E3E042B6B1D8E4142021B502-->  <ISACTIVE><![CDATA[Y]]></ISACTIVE>
+<!--9BE67BA6E3E042B6B1D8E4142021B502-->  <OBKMO_WIDGET_CLASS_ID><![CDATA[E81E6193FA614852AFB569007A348D24]]></OBKMO_WIDGET_CLASS_ID>
+<!--9BE67BA6E3E042B6B1D8E4142021B502-->  <HQL><![CDATA[SELECT  p.bakaracode as Bakaracode,
+(SELECT name from ADList WHERE value = (SELECT productType FROM paper_quality WHERE bakaracode = p.bakaracode)
+AND reference= (SELECT id FROM ADReference WHERE name='paper_ProductType')) as Producttype
+ ,p.businessPartner.name as C_Bpartner_ID,p.bakaraweight as Bakaraweight,p.bakaraqotr as Bakaraqotr,p.gsm as Gsm,
+p.bakarawidth as Bakarawidth,p.paperMachine.mashineName as Paper_Machine_ID,
+p.wasla as Wasla,p.paperQualityDegree.degree as Paper_Quality_Degree_ID
+FROM paper_quality as p
+WHERE iscompleted = 'N']]></HQL>
+<!--9BE67BA6E3E042B6B1D8E4142021B502-->  <TYPE><![CDATA[HQL]]></TYPE>
+<!--9BE67BA6E3E042B6B1D8E4142021B502--></OBCQL_WIDGET_QUERY>
+
+</data>

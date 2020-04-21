@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="period_taxes_ar" pageWidth="595" pageHeight="842" whenNoDataType="NoPages" columnWidth="565" leftMargin="15" rightMargin="15" topMargin="10" bottomMargin="10" uuid="3deeb930-ed0b-4f5b-9cda-a9705973de00">
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="UTF-8"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="27gp"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<parameter name="clientName" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["شركة مطاحن وسط و غرب الدلتا"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ad_client_id" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="BASE_WEB" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="year" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="ad_org_id" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="total_weight" class="java.lang.String" isForPrompting="false"/>
+	<queryString>
+		<![CDATA[SELECT shiftname
+FROM paper_shift]]>
+	</queryString>
+	<field name="shiftname" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="shiftname"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="paper_shift"/>
+	</field>
+	<variable name="totalearning" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{earning}]]></variableExpression>
+	</variable>
+	<variable name="totaldeduction" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{deduction}]]></variableExpression>
+	</variable>
+	<variable name="totalnet" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{net}]]></variableExpression>
+	</variable>
+	<variable name="gtotalearning" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{earning}]]></variableExpression>
+	</variable>
+	<variable name="gtotaldeduction" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{deduction}]]></variableExpression>
+	</variable>
+	<variable name="gtotalnet" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{net}]]></variableExpression>
+	</variable>
+	<group name="machine_bakras">
+		<groupExpression><![CDATA[]]></groupExpression>
+		<groupHeader>
+			<band height="80" splitType="Stretch">
+				<textField isBlankWhenNull="false">
+					<reportElement key="textField" x="184" y="5" width="179" height="22" uuid="6fca5fde-4112-4b4f-95fa-292984ff62f9"/>
+					<textElement textAlignment="Center">
+						<font size="16"/>
+					</textElement>
+					<textFieldExpression><![CDATA["ورديه" + $F{shift_type}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="false">
+					<reportElement key="textField" x="0" y="64" width="563" height="16" forecolor="#000000" backcolor="#CCCCCC" uuid="f5f7b540-cdab-484b-b6c0-12d06236b26d"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{quality_degree} + "درجه الفرز"]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="50" splitType="Stretch">
+				<textField isBlankWhenNull="false">
+					<reportElement key="textField" x="166" y="13" width="206" height="16" uuid="132d8cf6-6beb-4d2f-8dd4-cb4e20d3bca1"/>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[$F{quality_degree_weight} + "الوزن الكلي للفرزه"]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="false">
+					<reportElement key="textField" x="372" y="13" width="189" height="16" uuid="887a2ac2-6bae-4dad-a8b5-a2d196a7bca7"/>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[$F{quality_bakra_num} + "عدد البكرات للفرزه"]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="76" splitType="Stretch">
+			<line>
+				<reportElement key="line-2" x="0" y="75" width="563" height="1" uuid="0705831e-cc59-4238-b6f1-17044945ccb3"/>
+			</line>
+			<staticText>
+				<reportElement key="staticText-32" x="510" y="1" width="55" height="16" uuid="e813ab72-10a9-466b-958a-aa903d3f721a"/>
+				<box rightPadding="5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Mohamed" pdfFontName="mohamed.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[التــاريخ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-33" x="508" y="33" width="55" height="16" uuid="90663b26-a755-43eb-ac0e-6dd32781e8c9"/>
+				<box rightPadding="5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Mohamed" pdfFontName="mohamed.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[الصفحــة]]></text>
+			</staticText>
+			<textField pattern="yyyy/MM/dd" isBlankWhenNull="true">
+				<reportElement key="textField-17" x="448" y="1" width="60" height="16" uuid="ba200a80-2961-4938-b42d-34bf3be1a43a"/>
+				<box rightPadding="5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Mohamed" pdfFontName="mohamed.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-34" x="508" y="17" width="55" height="16" uuid="0954a465-74ce-48cc-b555-4ebf977d7bc9"/>
+				<box rightPadding="5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Mohamed" pdfFontName="mohamed.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[الـــوقت]]></text>
+			</staticText>
+			<textField pattern="HH:mm:ss" isBlankWhenNull="true">
+				<reportElement key="textField-18" x="448" y="17" width="60" height="16" uuid="7ea7265f-8b96-4136-9575-d70c874f58cb"/>
+				<box rightPadding="5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Mohamed" pdfFontName="mohamed.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<image scaleImage="FillFrame" hAlign="Center" vAlign="Middle">
+				<reportElement key="image-1" x="0" y="0" width="160" height="55" uuid="1a8cefe5-e042-4628-988d-45e635b9cf14"/>
+				<imageExpression><![CDATA[$P{BASE_WEB}+"/../utility/ShowImageLogo?logo=yourcompanydoc"+"&orgId="+$P{ad_org_id}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement key="staticText-113" x="278" y="3" width="152" height="34" uuid="8f63181b-c485-4d37-89bf-cc64526662d2"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Mohamed" size="18" isBold="true" pdfFontName="mohamed.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[تقرير الأنتاج ليوم]]></text>
+			</staticText>
+			<textField evaluationTime="Report" isBlankWhenNull="true">
+				<reportElement key="textField-32" x="448" y="33" width="25" height="16" uuid="db20fbf7-b553-4dc7-8990-8533bafc9a15"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Mohamed" pdfFontName="arial.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-117" x="473" y="33" width="10" height="16" uuid="8602c9fa-d562-4efb-9535-c798e3e2999e"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Mohamed" isBold="true" pdfFontName="mohamed.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[-]]></text>
+			</staticText>
+			<textField evaluationTime="Page" isBlankWhenNull="true">
+				<reportElement key="textField-33" x="483" y="33" width="25" height="16" uuid="97587ab0-f724-416d-ba5a-904b6cfa3259"/>
+				<box rightPadding="5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Mohamed" pdfFontName="arial.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="currentMonth" x="166" y="4" width="113" height="32" uuid="65fa70ec-246f-4bfb-b7fa-6be07ae46969"/>
+				<box rightPadding="5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Mohamed" size="18" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{day}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="50" splitType="Prevent">
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="275" y="11" width="123" height="15" uuid="02abb21e-cfa1-4797-86a8-e96ba836ad65"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{bakra_num} + "عدد البكر"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="397" y="11" width="166" height="15" uuid="ee484198-9a3b-4bf5-bedf-844a11399cad"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{quality_type} + "سبب الفرز"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="118" y="11" width="157" height="15" uuid="8a005b75-1665-4004-9aa0-cb802d749740">
+					<printWhenExpression><![CDATA[$F{group_weight} + "الوزن"]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{group_weight} + "الوزن"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="50" splitType="Stretch">
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="333" y="26" width="167" height="17" uuid="0cfa4847-32d9-4382-ae0e-f53cdbb24dd9"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{total_bakra_num} + "العدد الكلي"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="100" y="27" width="144" height="17" uuid="1c5b2160-4fbf-4fb9-9cf4-202646017d1c"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{total_weight} + "الوزن الكلي"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="21" splitType="Stretch"/>
+	</lastPageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

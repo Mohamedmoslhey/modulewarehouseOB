@@ -1,0 +1,652 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD Xhtml 1.0 Transitional//EN" "http://www.w3.org/tr/xhtml1/Dtd/xhtml1-transitional.dtd">
+<!--
+ *************************************************************************
+ * The contents of this file are subject to the Openbravo  Public  License
+ * Version  1.1  (the  "License"),  being   the  Mozilla   Public  License
+ * Version 1.1  with a permitted attribution clause; you may not  use this
+ * file except in compliance with the License. You  may  obtain  a copy of
+ * the License at http://www.openbravo.com/legal/license.html 
+ * Software distributed under the License  is  distributed  on  an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
+ * License for the specific  language  governing  rights  and  limitations
+ * under the License. 
+ * The Original Code is Openbravo ERP. 
+ * The Initial Developer of the Original Code is Openbravo SLU 
+ * All portions are Copyright (C) 2001-2012 Openbravo SLU
+ * All Rights Reserved. 
+ * Contributor(s):  ______________________________________.
+ ************************************************************************
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Generate Invoices manual</title>
+<link rel="shortcut icon" href="../../../../../web/images/favicon.ico"
+	type="image/x-icon" />
+<link rel="stylesheet" type="text/css"
+	href="../../../../../web/skins/Default/Openbravo_ERP_250.css"
+	id="paramCSS" />
+<style>
+th {
+	resize: horizontal;
+	overflow: auto;
+}
+ .containerT{
+width:672px;
+background-color:#fff;
+
+margin:auto;
+overflow: hidden;
+display: flex;
+}
+ #block_containerA {
+ display: flex;
+    justify-content: left;
+    margin: auto;
+
+}
+ #block_containerB {
+ display: flex;
+   justify-content: left;
+    margin: auto;
+}
+ #block_containerC {
+ display: flex;
+   justify-content: left;
+    margin: auto;
+}
+ #labela {
+   margin: auto;
+}
+#labelb {
+   margin: auto;
+}
+#labelc {
+  margin: auto;
+}
+
+#labeld{
+  margin: auto;
+}
+
+label.cameraButton {
+	display: inline-block;
+	margin: 2px 40px;
+	/* Styles to make it look like a button */
+	padding: 0.5em;
+	border: 2px solid #666;
+	border-color: #EEE #CCC #CCC #EEE;
+	background-color: #DDD;
+}
+
+/* Look like a clicked/depressed button */
+label.cameraButton:active {
+	border-color: #CCC #EEE #EEE #CCC;
+}
+
+/* This is the part that actually hides the 'Choose file' text box for camera inputs */
+label.cameraButton input[accept="image/*"] {
+	display: none;
+	padding-right: 10%
+}
+
+.block_containerr {
+
+    justify-content: left;
+    margin: auto;
+}
+
+.block_containerr .botocontA  {
+ 
+  padding: 30px ;
+  
+}
+
+.block_containerr .botocontA  .Button2Link{
+ background-color: #008000;
+     border-color: #15c32d;
+    /* border: none; */
+    color: #161716;
+  text-align: center;
+  padding: 30px ;
+  width:400;
+  height:70;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 30px;
+margin:auto;
+  cursor: pointer;
+}
+.block_containerr .botocontB  {
+ 
+  padding: 30px ;
+ 
+}
+
+.block_containerr .botocontB  .ButtonLink{
+ background-color: #008000;
+     border-color: #15c32d;
+    /* border: none; */
+    color: #161716;
+  text-align: center;
+  padding: 30px ;
+  width:400;
+  height:70;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 30px;
+margin:auto;
+  cursor: pointer;
+}
+</style>
+
+<script language="JavaScript" type="text/javascript" id="paramDirectory">
+    var baseDirectory = "../../../../../web/";
+</script>
+<script language="JavaScript" src="../../../../../web/js/messages.js"
+	type="text/javascript">
+    
+</script>
+<script language="JavaScript" src="../utility/DynamicJS.js"
+	type="text/javascript"></script>
+<script language="JavaScript" type="text/javascript" id="paramLanguage">
+    var defaultLang = "en_US";
+</script>
+
+
+<script language="JavaScript" src="../../../../../web/js/shortcuts.js"
+	type="text/javascript"></script>
+<script language="JavaScript" src="../../../../../web/js/utils.js"
+	type="text/javascript"></script>
+<script language="JavaScript"
+	src="../../../../../web/js/windowKeyboard.js" type="text/javascript"></script>
+<script language="JavaScript" src="../../../../../web/js/searchs.js"
+	type="text/javascript"></script>
+<script language="JavaScript" src="../../../../../web/js/ajax.js"
+	type="text/javascript"></script>
+<script language="JavaScript"
+	src="../../../../../web/js/default/MessageBox.js"
+	type="text/javascript"></script>
+<script language="JavaScript" src="../../../../../web/js/messages.js"
+	type="text/javascript"></script>
+<script language="JavaScript" src="../utility/DynamicJS.js"
+	type="text/javascript"></script>
+<script language="JavaScript"
+	src="../../../../../web/../org.openbravo.client.kernel/OBCLKER_Kernel/StaticResources"
+	type="text/javascript"></script>
+<script language="JavaScript"
+	src="../../../../../web/org.openbravo.userinterface.selector/js/classic-skin-variable.js"
+	type="text/javascript"></script>
+<script language="JavaScript"
+	src="../../../../../web/js/jscalendar/calendar.js"
+	type="text/javascript"></script>
+<script language="JavaScript"
+	src="../../../../../web/js/jscalendar/lang/calendar-es.js"
+	type="text/javascript" id="fieldCalendar"></script>
+<script language="JavaScript"
+	src="../../../../../web/js/default/DateTextBox.js"
+	type="text/javascript"></script>
+<script language="JavaScript" src="../../../../../web/js/dojoConfig.js"
+	type="text/javascript"></script>
+<script language="JavaScript" src="../../../../../web/js/dojo/dojo.js"
+	type="text/javascript"></script>
+<script language="JavaScript" src="../../../../../web/js/appStatus.js"
+	type="text/javascript"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script language="JavaScript" type="text/javascript" id="paramDirectory">
+var baseDirectory = "../../../../../web/";
+</script>
+<script language="JavaScript" src="../utility/DynamicJS.js"
+	type="text/javascript"></script>
+<script language="JavaScript" type="text/javascript" id="paramLanguage">
+  var defaultLang = "en_US";
+</script>
+<script language="JavaScript" src="../../../../../web/js/shortcuts.js"
+	type="text/javascript"></script>
+<script language="JavaScript" src="../../../../../web/js/utils.js"
+	type="text/javascript"></script>
+<script language="JavaScript"
+	src="../../../../../web/js/windowKeyboard.js" type="text/javascript"></script>
+<script language="JavaScript" src="../../../../../web/js/appStatus.js"
+	type="text/javascript"></script>
+<script language="JavaScript" src="../../../../../web/js/searchs.js"
+	type="text/javascript"></script>
+<script language="JavaScript"
+	src="../../../../../web/js/jscalendar/calendar.js"
+	type="text/javascript"></script>
+<script language="JavaScript"
+	src="../../../../../web/js/jscalendar/lang/calendar-es.js"
+	type="text/javascript" id="fieldCalendar"></script>
+<script language="JavaScript"
+	src="../../../../../web/org.openbravo.userinterface.selector/js/classic-skin-variable.js"
+	type="text/javascript"></script>
+<script language="JavaScript"
+	src="../../../../../web/js/default/DateTextBox.js"
+	type="text/javascript"></script>
+<script language="JavaScript" src="../../../../../web/js/ajax.js"
+	type="text/javascript"></script>
+<script language="JavaScript"
+	src="../../../../../web/js/default/MessageBox.js"
+	type="text/javascript"></script>
+<script language="JavaScript" src="../../../../../web/js/messages.js"
+	type="text/javascript"></script>
+<script language="JavaScript" src="../utility/DynamicJS.js"
+	type="text/javascript"></script>
+<script language="JavaScript" src="../../../../../web/js/dojoConfig.js"
+	type="text/javascript"></script>
+<script language="JavaScript" src="../../../../../web/js/dojo/dojo.js"
+	type="text/javascript"></script>
+<script type="text/javascript"> 
+      //all dojo.require above this line
+      dojo.hostenv.writeIncludes(); //makes debugging in Venkman possible
+</script>
+<script language="JavaScript" type="text/javascript">
+    function onloadFunctions(){
+    keyArray[keyArray.length] = new keyArrayItem("ENTER", "openSearch(null, null, '../info/BusinessPartner.html', 'BPARTNER_SELECTOR', false, 'frmMain', 'inpcBpartnerId', 'inpBpartnerId_DES', document.frmMain.inpBpartnerId_DES.value, 'Command', 'KEY');", "inpBpartnerId_DES", "null");
+}
+</script>
+<script language="JavaScript" type="text/javascript">
+
+function validate(action) {
+  var frm=document.frmMain;
+  if (action=="GENERATE") {
+    if (radioValue(frm.inpOrder)==null) {
+      showJSMessage(1);
+      return false;
+    }
+    dateField = document.getElementById('paramInvDate');
+    if (dateField.value!=null && dateField.value!="" && !isValidDate(dateField.value, dateField.getAttribute('displayFormat'))) {
+      setWindowElementFocus(dateField);
+      showJSMessage(5);
+      return false;
+    }
+    setProcessingMode('window', true);
+  } else if (action=="FIND") {
+    if (frm.inpadOrgId.value==null || frm.inpadOrgId.value=="") {
+      setWindowElementFocus(frm.inpadOrgId);
+      showJSMessage(7);
+      return false;
+    }
+    dateField = document.getElementById('paramDateFrom');
+    if (dateField.value!=null && dateField.value!="" && !isValidDate(dateField.value, dateField.getAttribute('displayFormat'))) {
+      setWindowElementFocus(dateField);
+      showJSMessage(5);
+      return false;
+    }
+    dateField = document.getElementById('paramDateTo');
+    if (dateField.value!=null && dateField.value!="" && !isValidDate(dateField.value, dateField.getAttribute('displayFormat'))) {
+      setWindowElementFocus(dateField);
+      showJSMessage(5);
+      return false;
+    }
+  }
+  return true;
+}
+
+function sendForm(action) {
+    if (!validate(action)) {
+      return false;
+    }
+    if (action==('FIND')){
+      submitCommandForm('FIND', true);
+    }
+    if (action==('GENERATE')){
+      submitCommandForm('GENERATE', true, null, null, null, true);
+    }
+}
+</script>
+<script language="JavaScript" type="text/javascript">
+    
+  function onLoadDo(){
+     setProcessingMode('window', false);
+         this.windowTables = new Array(
+          new windowTableId('client', 'buttonSearch'),
+          new windowTableId('tdbottomButtons', 'buttonProcess')
+        );
+        setWindowTableParentElement();
+        this.tabsTables = new Array(
+          new tabTableId('tdtopTabs')
+        );
+        setTabTableParentElement();
+        enableShortcuts('edition');
+        setBrowserAutoComplete(false);
+        
+        try {
+          onloadFunctions();
+        } catch (e) {}
+        resizeArea();
+        updateMenuIcon('buttonMenu');
+
+        setWindowElementFocus('firstElement');
+    }
+
+    function onResizeDo(){
+        resizeArea();
+    }
+    
+    function openSalesOrders(recordid) {
+        var myframe = getFrame('LayoutMDI') || top.opener;
+        if (myframe) {
+            myframe.OB.Utilities.openDirectTab('186', recordid);
+        }
+    }
+    </script>
+</head>
+<body onload="onLoadDo();" onresize="onResizeDo();" leftmargin="0"
+	topmargin="0" marginwidth="0" marginheight="0" id="paramMessage">
+
+	<form method="post" action="com.ibox.paper.ad_forms/SalesScanner.html"
+		name="frmMain" enctype='multipart/form-data'>
+		<input type="hidden" name="Command"></input> <input type="hidden"
+			name="inpLastFieldChanged" value=""> <input type="hidden"
+			name="inpproductId"></input>
+
+		<table height="100%" border="0" cellpadding="0" cellspacing="0"
+			id="main">
+			<tr>
+				<td valign="top" id="tdleftTabs"></td>
+				<td valign="top">
+					<table width="100%" border="0" cellspacing="0" cellpadding="0"
+						class="Main_ContentPane_Left">
+						<tr>
+							<td class="Main_NavBar_bg_left" id="tdleftSeparator"></td>
+						</tr>
+						<tr>
+							<td class="Main_ToolBar_bg_left" valign="top"></td>
+						</tr>
+						<tr>
+							<td class="Main_Client_bg_left"></td>
+						</tr>
+						<tr>
+							<td class="Main_Bottom_bg_left"></td>
+						</tr>
+					</table>
+				</td>
+				<td valign="top">
+					<div class="Main_ContentPane_NavBar" id="tdtopButtons"></div>
+					<div class="Main_ContentPane_ToolBar" id="paramToolBar"></div>
+					<table width="100%" border="0" cellspacing="0" cellpadding="0"
+						class="Main_ContentPane_TabPane" id="tdtopTabs">
+						<tr id="paramParentTabContainer"></tr>
+						<tr id="paramMainTabContainer"></tr>
+						<tr id="paramChildTabContainer"></tr>
+					</table>
+					<div class="Main_ContentPane_Client"
+						style="overflow: auto; display: none; border-bottom: 0px none;"
+						id="client">
+						<table class="dojoTabContainer" border="0" cellpadding="0"
+							cellspacing="0" width="100%" summary="">
+							<tr>
+								<td>
+									<table class="dojoTabPaneWrapper" border="0" cellpadding="0"
+										cellspacing="0" width="100%" summary="">
+										<tr>
+											<td>
+												<!-- MessageBox -->
+
+												<table cellpadding="0" cellspacing="0" id="messageBoxID"
+													class="MessageBoxyy">
+													<tbody>
+														<tr class="MessageBox_TopMargin">
+															<td class="MessageBox_LeftMargin"></td>
+															<td></td>
+															<td class="MessageBox_RightMargin"></td>
+														</tr>
+														<tr>
+															<td class="MessageBox_LeftMargin"></td>
+															<td>
+
+																<table cellpadding="0" cellspacing="0"
+																	class="MessageBox_Container">
+																	<tbody>
+																		<tr>
+																			<td class="MessageBox_LeftTrans">
+																				<table style="width: 100%; height: 100%"
+																					cellpadding="0" cellspacing="0">
+																					<tbody>
+																						<tr>
+																							<td class="MessageBox_TopLeft"></td>
+																						</tr>
+																						<tr>
+																							<td class="MessageBox_Left"></td>
+																						</tr>
+																					</tbody>
+																				</table>
+																			</td>
+																			<td class="MessageBox_bg">
+
+																				<table class="MessageBox_Top">
+																					<tbody>
+																						<tr>
+																							<td><span>
+																									<table cellpadding="0" cellspacing="0"
+																										class="MessageBox_Body_ContentCell">
+																										<tbody>
+																											<tr>
+																												<td class="MessageBox_Icon_ContentCell">
+																													<div class="MessageBox_Icon"></div>
+																												</td>
+																												<td style="vertical-align: top;"
+																													id="messageBoxIDContent"><span>
+																														<div class="MessageBox_TextTitle"
+																															id="messageBoxIDTitle">xxInfo:
+																															AccessTableWithNoView</div>
+																														<div class="MessageBox_TextDescription"
+																															id="messageBoxIDMessage">xxThe
+																															current information is empty.</div>
+																														<div class="MessageBox_TextSeparator"></div>
+																												</span></td>
+																											</tr>
+																										</tbody>
+																									</table>
+																							</span></td>
+																						</tr>
+																					</tbody>
+																				</table>
+
+																			</td>
+																			<td class="MessageBox_RightTrans">
+																				<table style="width: 100%; height: 100%"
+																					cellpadding="0" cellspacing="0">
+																					<tbody>
+																						<tr>
+																							<td class="MessageBox_TopRight"></td>
+																						</tr>
+																						<tr>
+																							<td class="MessageBox_Right"></td>
+																						</tr>
+																					</tbody>
+																				</table>
+																			</td>
+																		</tr>
+																		<tr>
+																			<td rowspan="2" class="MessageBox_BottomLeft"></td>
+																			<td class="MessageBox_BottomTrans MessageBox_bg">
+																			</td>
+																			<td rowspan="2" class="MessageBox_BottomRight">
+																			</td>
+																		</tr>
+																		<tr>
+																			<td class="MessageBox_Bottom"></td>
+																		</tr>
+																	</tbody>
+																</table>
+
+															</td>
+															<td class="MessageBox_RightMargin"></td>
+														</tr>
+														<tr class="MessageBox_BottomMargin">
+															<td class="MessageBox_LeftMargin"></td>
+															<td></td>
+															<td class="MessageBox_RightMargin"></td>
+														</tr>
+													</tbody>
+												</table> <!-- USER CONTROLS -->
+												<table class="Main_Client_TableEdition">
+													<tr>
+														<td class="TableEdition_OneCell_width"></td>
+														<td class="TableEdition_OneCell_width"></td>
+														<td class="TableEdition_OneCell_width"></td>
+														<td class="TableEdition_OneCell_width"></td>
+														<td class="TableEdition_OneCell_width"></td>
+														<td class="TableEdition_OneCell_width"></td>
+													</tr>
+
+              <!--Filters-->
+              
+              
+<div class="containerT">
+         <div id="block_containerA">
+  <div id="labela" >
+<LABEL >رقم اذن الصرف</LABEL>
+<br>
+  <input type="text" name="inpcDocnoId" value="" id="fieldDocumentno" maxlength="20" style="padding-right: 10%" readonly></input>
+  </div>
+  <div id="labelb" >
+ <LABEL >المنشاة</LABEL>
+ <br>
+    <input type="text" name="inpcOrgaz" value="" id="fieldOrgz" maxlength="20" style="padding-right: 10%" readonly></input> 
+     
+ </div>
+  <div id="labelc" >
+ <LABEL >المخزن المصروف منه</LABEL>
+ <br>
+ <input type="text" name="inpcWarehouseId" value="" id="fieldWareZ" maxlength="20" style="padding-right: 10% ;text-align: right;" readonly></input> 
+ </div>
+ </div>
+</div>
+<div class="containerT">
+ <div id="block_containerB">
+  <div id="labela" >
+ <LABEL >العميل</LABEL>
+ <br>
+  <input type="text" name="inpcWarehouseId" value="" id="fieldBpartnerz" maxlength="20" style="padding-right: 10% ;text-align: right;" readonly></input> 
+ </div>
+  <div id="labelb" >
+<LABEL >عنوان العميل</LABEL>
+<br>
+  <input type="text" name="inpcPartnerAdId" value="" id="fieldBpLocationz" maxlength="40" style="padding-right: 10%" readonly></input> 
+  </div>
+   
+  <div id="labelc" >
+ <LABEL >أجمالى وزن الشحنة</LABEL>
+ <br>
+    <input type="text" name="inpcTotWeigthId" value="" id="fieldTotWz" maxlength="20" style="padding-right: 10%" readonly></input> 
+ </div>
+ </div>
+</div>
+<div class="containerT">
+ <div id="block_containerC">
+  <div id="labela" >
+ <LABEL >عدد البكرات فى الشحنة</LABEL>
+ <br>
+    <input type="text" name="inpcNumberOfRollId" value="" id="fieldNoitemz" maxlength="20" style="padding-right: 10%" readonly></input> 
+ </div>
+  <div id="labelb" >
+ <LABEL >السائق</LABEL>
+ <br>
+   <input type="text" name="inpcDriverId" value="" id="fieldDriverz" maxlength="20" style="padding-right: 10%" readonly></input> 
+ </div>
+  <div id="labelc" >
+<LABEL >رقم السيارة</LABEL>
+<br>
+  <input type="text" name="inpCarnumberId" value="" id="fieldCarnoz" maxlength="20" style="padding-right: 10%" readonly></input> 
+  </div>
+  
+</div>
+</div>
+											<table cellspacing="0" cellpadding="0" width="100%" style="text-align:-moz-center;_text-align:center;">
+    <tr>
+ 
+ <td>
+      <div class="Popup_ContentPane_Client" style="overflow: auto;">
+        <table cellspacing="0" cellpadding="0" width="100%" class="DataGrid_Header_Table DataGrid_Body_Table">
+          <tr class="Popup_Client_Selector_DataGrid_HeaderRow"> 
+           
+             <th class="DataGrid_Header_Cell" width="91">كود البكرة</th>
+            <th class="DataGrid_Header_Cell" width="100">نوع المنتج</th>
+            <th class="DataGrid_Header_Cell" width="91">درجة الجودة</th>
+            <th class="DataGrid_Header_Cell" width="91">جى اس ام</th>
+           <th class="DataGrid_Header_Cell" width="91">عرض البكرة</th>
+            <th class="DataGrid_Header_Cell" width="91">قطر البكرة</th>
+           <th class="DataGrid_Header_Cell" width="91">الماكينة</th>
+           <th class="DataGrid_Header_Cell" width="150">العميل</th>
+           <th class="DataGrid_Header_Cell" width="91">وزن البكرة</th>
+          <th class="DataGrid_Header_Cell" width="91">ملاحظات</th>
+         
+          
+          </tr>
+          <div id="sectionDetail"> 
+            <tr class="DataGrid_Body_Row DataGrid_Body_Row_xx" id="funcEvenOddRow"> 
+             
+               <td class="DataGrid_Body_Cell" id="fieldJumbocode"></td>
+            <td class="DataGrid_Body_Cell" id="fieldProducttype"></td>
+            <td class="DataGrid_Body_Cell" id="fieldQualitydegree"></td>
+             <td class="DataGrid_Body_Cell" id="fieldGSM"></td>
+            <td class="DataGrid_Body_Cell" id="fieldBakaraWidth"></td>
+            <td class="DataGrid_Body_Cell" id="fieldBakaraqotr"></td>
+             <td class="DataGrid_Body_Cell" id="fieldMachine"></td>
+            <td class="DataGrid_Body_Cell" id="fieldClientpaper"></td>
+            <td class="DataGrid_Body_Cell" id="fieldBakaraweigth"></td>
+             <td class="DataGrid_Body_Cell" id="fieldPapernotes"></td>
+           
+           
+          
+            </tr>
+          </div>
+        </table>
+       </div>
+     </td>
+    </tr>
+ </table>
+ 
+ 
+ <div class="containerT">
+ <div class="block_containerr">
+ 
+ 
+        
+                                                            <div class="botocontA">
+                                                               <a class="Button2Link" id="buttonPDF"
+        onclick="submitCommandForm('GENERATE', false, null, 'SalesScanner.html', '_self', null, false);return false;"> اختر البكر  </a>  
+                                                   
+                                                 </div> 
+                                                          
+
+
+
+
+                                                       
+                                                               <div class="botocontB">
+        <a class="ButtonLink" id="buttonPDF"
+        onclick="submitCommandForm('UPDATER', false, null, 'SalesScanner.html', '_self', null, false);return false;"> اتمام عملية البيع </a>  
+                                                                       
+            
+
+                                                 </div>
+                                                 
+  
+</div>
+</div>
+				
+
+					
+			</tr>
+		</table>
+	</form>
+</body>
+</html>

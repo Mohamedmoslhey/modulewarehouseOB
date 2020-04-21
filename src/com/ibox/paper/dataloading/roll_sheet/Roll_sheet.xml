@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<REPORT>
+  <template file="Roll_sheet.html"/>
+  
+ <PARAMETER id="paramToolBar" name="toolbar" default=""/>
+  <PARAMETER id="fieldCalendar" name="calendar" attribute="src" replace="es" default="en"/>
+  <PARAMETER id="paramDirectory" name="directory" default=""/>
+  <PARAMETER id="paramLanguage" name="paramLanguage" default=""/>
+ <PARAMETER id="paramLanguage" name="paramLanguage" default=""/>
+   <PARAMETER id="paramDateFrom" name="dateFrom" attribute="value"/>
+    <PARAMETER id="paramDateFrom" name="dateFromdisplayFormat" attribute="displayformat" replace="xx"/>
+    <PARAMETER id="paramDateFrom" name="dateFromsaveFormat" attribute="saveformat" replace="yy"/>
+  <PARAMETER id="paramDateTo" name="dateTo" attribute="value"/>
+    <PARAMETER id="paramDateTo" name="dateTodisplayFormat" attribute="displayformat" replace="xx"/>
+    <PARAMETER id="paramDateTo" name="dateTosaveFormat" attribute="saveformat" replace="yy"/>
+  <PARAMETER id="paramDateTo" name="dateTo" attribute="value"/>
+  <PARAMETER id="parameterConstantRawMaterial" name="constantRawMaterial" default="N"/>
+  <PARAMETER id="paramRawMaterial" name="rawMaterial" boolean="checked" withId="parameterConstantRawMaterial"/>
+  <PARAMETER id="paramCSS" name="theme" attribute="href" replace="Default"/>
+  <PARAMETER id="tdleftTabs" name="leftTabs" default=""/>
+  <PARAMETER id="paramParentTabContainer" name="parentTabContainer" default=" "/>
+  <PARAMETER id="paramMainTabContainer" name="mainTabContainer" default=" "/>
+  <PARAMETER id="paramChildTabContainer" name="childTabContainer" default=" "/>
+  <PARAMETER id="tdtopButtons" name="navigationBar" default=""/>
+  <PARAMETER id="messageBoxID" name="messageType" attribute="class" replace="yy" default="HIDDEN"/>
+  <PARAMETER id="messageBoxIDTitle" name="messageTitle" default=""/>
+  <PARAMETER id="messageBoxIDMessage" name="messageMessage" default=""/>
+  
+    <PARAMETER id="idblockno" name="nameblockno"            attribute="value"    replace="xxx"/>
+    <PARAMETER id="idcurrentblock" name="namecurrentblock"  attribute="value"    replace="xxx"/>
+    <PARAMETER id="idremain" name="nameremain"             attribute="value"    replace="xxx"/>
+
+</REPORT>

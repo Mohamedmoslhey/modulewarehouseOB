@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER PAPER_C_ORDER_TRG">
+    <trigger name="PAPER_C_ORDER_TRG" table="C_ORDER" fires="after" insert="false" update="true" delete="false" foreach="row">
+      <body><![CDATA[
+Cur_line RECORD;
+ BEGIN
+  IF AD_isTriggerEnabled()='Y' THEN IF DELETING THEN IF INSERTING THEN RETURN OLD; ELSE RETURN NEW; END IF; 
+  END IF;
+   END IF;
+  IF (UPDATING) THEN
+	IF (:NEW.docstatus='CO') THEN
+		IF (:NEW.docaction='--') THEN
+		   IF((SELECT name FROM c_doctype WHERE c_doctype_id =:OLD.c_doctype_id) = 'RFC Order') THEN
+			    FOR Cur_line IN
+			      (SELECT em_paper_jumbo_code
+			       FROM C_ORDERLINE
+			       WHERE C_Order_ID = :OLD.C_Order_ID 
+			      )
+			    LOOP
+				IF((SELECT COUNT(*) FROM paper_quality WHERE bakaracode='R'||(Cur_line.em_paper_jumbo_code)) = 0)THEN
+					INSERT INTO public.paper_quality(paper_quality_id,
+					   ad_client_id, ad_org_id, isactive, created, 
+					    createdby, updated, updatedby, paper_employee_idd, pname, cname, 
+					    bakaracode, gsm, producttype, bakaraweight, bakarawidth, tryone, 
+					    trytwo, trythree, tryfour, tryfive, trysix, tryseven, tryeight, 
+					    trynine, tryten, avrage, decision, firstrefuse, secondrefuse, 
+					    paper_quality_degree_id, machinespeed, c_bpartner_id, notes, 
+					    paper_machine_id, productiondate, shad_toly, shadardy, somc,somcone ,somctwo ,somcthree ,somcfour ,
+somcfive ,somcsix ,somcseven ,somceigth ,somcnine ,somcten ,somcaverage ,seq ,productiontime , 
+					    fasltabky, retopa, outside, proshift, cutshift, sheret_code, 
+					    bakaraqotr, tashrop, frontcolor, backcolor, docstatus, processing, 
+					    tasharback, wasla, allcompleted, iscompleted, completeandprocess,isreturned,status,rejectreason)
+				    SELECT  (select replace((select uuid_generate_v4())::character varying(36),'-','')),ad_client_id, ad_org_id, isactive, now(), 
+					    :OLD.createdby, now(), :OLD.createdby, paper_employee_idd, pname, cname, 
+					    'R'||(Cur_line.em_paper_jumbo_code), gsm, producttype, bakaraweight, bakarawidth, tryone, 
+					    trytwo, trythree, tryfour, tryfive, trysix, tryseven, tryeight, 
+					    trynine, tryten, avrage, decision, firstrefuse, secondrefuse, 
+					    paper_quality_degree_id, machinespeed, c_bpartner_id, notes, 
+					    paper_machine_id, productiondate, shad_toly, shadardy, somc, somcone ,somctwo ,somcthree ,somcfour ,
+somcfive ,somcsix ,somcseven ,somceigth ,somcnine ,somcten ,somcaverage ,seq ,productiontime , 
+					    fasltabky, retopa, outside, proshift, cutshift, sheret_code, 
+					    bakaraqotr, tashrop, frontcolor, backcolor, 'S2', processing, 
+					    tasharback, wasla, allcompleted, 'N', 'N','Y','3',(SELECT em_paper_rejectreason FROM c_orderline WHERE em_paper_jumbo_code = Cur_line.em_paper_jumbo_code)
+					      from public.paper_quality where bakaracode=Cur_line.em_paper_jumbo_code;
+			    
+				END IF;
+			  
+			    END LOOP;
+			END IF;
+		END IF;
+	END IF;
+ END IF;
+  END PAPER_C_ORDER_TRG
+]]></body>
+    </trigger>
+  </database>

@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION PAPER_GETQUALITY">
+    <function name="PAPER_GETQUALITY" type="VARCHAR">
+      <body><![CDATA[select paper_quality_degree_id from paper_quality_degree where name ='DEG01'
+]]></body>
+    </function>
+  </database>

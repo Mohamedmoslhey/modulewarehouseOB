@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+  <database name="MODIFIED TABLE M_INVENTORYLINE">
+    <table name="M_INVENTORYLINE" primaryKey="M_INVENTORYLINE_KEY">
+      <column name="EM_PAPER_JUMBO_CODE" primaryKey="false" required="false" type="VARCHAR" size="15" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="EM_PAPER_PRODUCT_TYPE" primaryKey="false" required="false" type="VARCHAR" size="60" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="EM_PAPER_QUALITY_DEGREE" primaryKey="false" required="false" type="VARCHAR" size="32" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="EM_PAPER_GSM" primaryKey="false" required="false" type="DECIMAL" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="EM_PAPER_BAKARAWIDTH" primaryKey="false" required="false" type="DECIMAL" size="19,2" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="EM_PAPER_BAKARAQOTR" primaryKey="false" required="false" type="DECIMAL" size="19,2" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="EM_PAPER_CLIENT" primaryKey="false" required="false" type="VARCHAR" size="32" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="EM_PAPER_BAKAWIEGHT" primaryKey="false" required="false" type="DECIMAL" size="19,2" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="EM_PAPER_MACHINE" primaryKey="false" required="false" type="VARCHAR" size="32" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="EM_PAPER_NOTES" primaryKey="false" required="false" type="VARCHAR" size="200" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+    </table>
+  </database>

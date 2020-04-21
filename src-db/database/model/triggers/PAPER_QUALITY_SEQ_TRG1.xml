@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER PAPER_QUALITY_SEQ_TRG1">
+    <trigger name="PAPER_QUALITY_SEQ_TRG1" table="PAPER_QUALITY" fires="before" insert="true" update="false" delete="false" foreach="row">
+      <body><![CDATA[
+
+v_max integer;
+BEGIN
+
+IF AD_isTriggerEnabled()='N' THEN RETURN;
+    END IF; 
+
+
+select max(seq)  into v_max from paper_quality;
+
+  if(v_max is null) then 
+
+  :new.seq =1;
+
+  else
+  
+  :new.seq= v_max+1;
+
+   -- raise exception '%','@لقد ادخلت هذا الكود سابقا !!!@';
+
+ end if;
+ 
+
+ 
+ END PAPER_QUALITY_SEQ_TRG1
+]]></body>
+    </trigger>
+  </database>

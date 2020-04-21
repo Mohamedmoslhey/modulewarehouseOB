@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SqlClass name="RollmanualData" package="com.ibox.paper.salesreportbyrollspe.gui.salesReportRollnumber">
+  <SqlClassComment>
+    This class is used to describe all data operations required by the controller (select, update, delete or insert).
+    At compile time, a BatchSetProductCategoryData.java class is generated with the same static methods as the ones 
+    defined here. By having it in the same package as the controller, the methods can be directly called.
+
+    In the future, the DAL (Data Access Layer) should replace the need for this file which at this point makes 
+    the servlet database dependant (Postgres/Oracle).
+  </SqlClassComment>
+  <SqlMethod name="select" type="preparedStatement" return="multiple">
+    <SqlMethodComment>Retrieve the list of products according to the filters passed</SqlMethodComment>
+    <Sql>
+    <![CDATA[
+      select documentno from m_inout where m_inout.MovementType IN ('C-', 'C+') and m_inout.isLogistic = 'N'
+      ]]></Sql>
+    <Field name="rownum" value="count"/>
+   
+  </SqlMethod>
+
+  <SqlMethod name="set" type="constant" return="multiple">
+      <SqlMethodComment>Retrieve an empty dataset (as opposed to having a null one)</SqlMethodComment>
+      <Sql></Sql>
+  </SqlMethod>
+
+  <SqlMethod name="bPartnerDescription" type="preparedStatement" return="String" default="">
+    <SqlMethodComment>Used to retrieve the human friendly label for a Business Partner using the ID</SqlMethodComment>
+    <Sql>
+    SELECT NAME FROM C_BPARTNER 
+    WHERE C_BPARTNER_ID = ?
+    </Sql>
+    <Parameter name="cBpartnerId"/>
+  </SqlMethod>
+
+  <SqlMethod name="treeOrg" type="preparedStatement" return="string">
+    <SqlMethodComment>Get an organization's children</SqlMethodComment>
+    <Sql>
+        SELECT AD_TREE_ORG_ID FROM AD_CLIENTINFO
+        WHERE AD_CLIENT_ID = ?
+    </Sql>
+    <Parameter name="client"/>
+  </SqlMethod>
+
+  <SqlMethod name="process" type="preparedStatement" return="rowCount">
+    <SqlMethodComment>Set a new product category to products</SqlMethodComment>
+    <Sql>
+    <![CDATA[
+      UPDATE M_Product SET M_Product_Category_Id=?
+      WHERE 1=1
+      ]]></Sql>
+    <Parameter name="mProductCategoryId"/>
+    <Parameter name="productIds" optional="true" type="argument" after="WHERE 1=1" text="AND M_Product_ID IN"/>
+  </SqlMethod>
+
+</SqlClass>

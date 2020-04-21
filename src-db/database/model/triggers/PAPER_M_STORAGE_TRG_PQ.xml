@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER PAPER_M_STORAGE_TRG_PQ">
+    <trigger name="PAPER_M_STORAGE_TRG_PQ" table="M_STORAGE_DETAIL" fires="after" insert="false" update="true" delete="false" foreach="row">
+      <body><![CDATA[
+BEGIN
+  IF AD_isTriggerEnabled()='N' THEN IF DELETING THEN IF INSERTING THEN RETURN OLD; ELSE RETURN NEW; END IF; 
+  END IF;
+   END IF;
+  IF (UPDATING) THEN
+   IF (:NEW.M_PRODUCT_ID IS NOT NULL) THEN
+	UPDATE public.paper_quality  SET
+	 	
+	 producttype = :NEW.em_paper_product_type,
+	 paper_quality_degree_id = :NEW.em_paper_quality_degree,
+	 gsm = :NEW.em_paper_gsm,
+	 bakarawidth = :NEW.em_paper_bakarawidth,
+	 bakaraqotr = :NEW.em_paper_bakaraqotr,
+	 paper_machine_id = :NEW.em_paper_machine,
+	 c_bpartner_id = :NEW.em_paper_client,
+	 bakaraweight = :NEW.em_paper_bakawieght,	 
+	 firstrefuse = :NEW.em_paper_firstrefuse,
+	 secondrefuse = :NEW.em_paper_secondrefuse,
+	 rejectreason = :NEW.em_paper_rejectreason
+
+	WHERE bakaracode = :NEW.em_paper_jumbo_code;	 
+   END IF;
+  END IF;
+END PAPER_M_STORAGE_TRG_PQ
+]]></body>
+    </trigger>
+  </database>
