@@ -40,13 +40,11 @@ public class CloseProInvHandler extends DalBaseProcess {
       OpeningBalance savedRoll = (OpeningBalance) OBDal.getInstance().get(OpeningBalance.class,
           roll_detail_id);
 
-      savedRoll.getRollCode();
-      savedRoll.getRollType();
-      savedRoll.getOpeningBalanceOperationDate();
-      savedRoll.getWidth();
-      savedRoll.getQotr();
-      savedRoll.getWeight();
-      savedRoll.getGsm();
+      /*
+       * savedRoll.getRollCode(); savedRoll.getRollType();
+       * savedRoll.getOpeningBalanceOperationDate(); savedRoll.getWidth(); savedRoll.getQotr();
+       * savedRoll.getWeight(); savedRoll.getGsm();
+       */
 
       // create m_product
       Product product = new Product();
