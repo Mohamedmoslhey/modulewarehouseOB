@@ -1,6 +1,7 @@
 package com.ibox.paper.ad_handler;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -8,14 +9,18 @@ import org.hibernate.query.Query;
 import org.openbravo.dal.core.OBContext;
 import org.openbravo.dal.service.OBDal;
 import org.openbravo.erpCommon.utility.OBError;
+import org.openbravo.model.common.enterprise.DocumentType;
 import org.openbravo.model.common.enterprise.Organization;
 import org.openbravo.model.financialmgmt.calendar.Period;
+import org.openbravo.model.financialmgmt.calendar.PeriodControl;
 import org.openbravo.model.materialmgmt.transaction.ShipmentInOut;
 import org.openbravo.scheduling.ProcessBundle;
 import org.openbravo.service.db.DalBaseProcess;
 
 public class CloseProInvHandler extends DalBaseProcess {
   // will start soon
+  static DocumentType docTy;
+
   @Override
   protected void doExecute(ProcessBundle bundle) throws Exception {
     try {
@@ -39,6 +44,11 @@ public class CloseProInvHandler extends DalBaseProcess {
 
       Date fromDate = savedPeriod.getStartingDate();
       Date toDate = savedPeriod.getEndingDate();
+      Calendar today = Calendar.getInstance();
+
+      today.setTime(toDate);
+      today.add(Calendar.DAY_OF_YEAR, 1);
+      Date nextDate = today.getTime();
 
       String hql = "select h from MaterialMgmtShipmentInOut h where h.client=:client"
           + " and h.movementType IN ('C-', 'C+') and h.logistic = 'N' and h.documentType.return='N'";
@@ -47,7 +57,7 @@ public class CloseProInvHandler extends DalBaseProcess {
         hql = hql + " and h.movementDate >=:fromdate ";
 
       if (toDate != null && !toDate.equals(""))
-        hql = hql + " and h.movementDate <=:todate ";
+        hql = hql + " and h.movementDate <=:nextDate ";
 
       Query query = OBDal.getInstance().getSession().createQuery(hql);
       query.setParameter("client", OBContext.getOBContext().getCurrentClient());
@@ -56,16 +66,44 @@ public class CloseProInvHandler extends DalBaseProcess {
         query.setParameter("fromdate", fromDate);
 
       if (toDate != null && !toDate.equals(""))
-        query.setParameter("todate", toDate);
+        query.setParameter("nextDate", nextDate);
 
       materialtrxList = query.list();
+      for (ShipmentInOut mInoutList : materialtrxList) {
+        String idNoc = mInoutList.getId();
+        String strSql = "update m_inout set processed ='Y',docaction ='--',docstatus='CO',"
+            + "process_goods_java='--' where m_inout.MovementType IN ('C-', 'C+') and m_inout.isLogistic = 'N'";
+        if (idNoc != null && !idNoc.equals(""))
+          strSql = strSql + "and m_inout_id =:idNoc ";
+        Query upQuery = OBDal.getInstance().getSession().createSQLQuery(strSql);
+        upQuery.setParameter("idNoc", idNoc);
+        upQuery.executeUpdate(); // create
+
+      }
+
+      String stSql = "update c_period set openclose ='C'"
+          + " where c_period.c_period_id =:period_id";
+
+      Query upCQuery = OBDal.getInstance().getSession().createSQLQuery(stSql);
+      upCQuery.setParameter("period_id", period_id);
+      upCQuery.executeUpdate(); // create
+
+      PeriodControl controlPeriod = new PeriodControl();
+
+      controlPeriod.setPeriodStatus("C");
+      controlPeriod.setPeriod(savedPeriod);
+      controlPeriod.setClient(OBContext.getOBContext().getCurrentClient());
+      controlPeriod.setOrganization(organization);
+      controlPeriod.setActive(true);
+      controlPeriod.setCreationDate(new Date());
+      controlPeriod.setCreatedBy(OBContext.getOBContext().getUser());
+      controlPeriod.setUpdated(new Date());
+      controlPeriod.setUpdatedBy(OBContext.getOBContext().getUser());
+      controlPeriod.setDocumentCategory("MMS");
+      OBDal.getInstance().getSession().save(controlPeriod);
+
+      // s OBDal.getInstance().getSession().getTransaction().commit();
       /*
-       * String strSql =
-       * "update m_inout set processed ='Y',docaction ='--',docstatus='CO',process_goods_java='--' where m_inout.MovementType IN ('C-', 'C+') and m_inout.isLogistic = 'N'"
-       * ; if (idNoc != null && !idNoc.equals("")) strSql = strSql + "and m_inout_id =:idNoc ";
-       * 
-       * Query query = OBDal.getInstance().getSession().createSQLQuery(strSql);
-       * query.setParameter("idNoc", inOut.getId()); // int moi = query.executeUpdate(); // create
        * m_product Product product = new Product();
        * product.setClient(OBContext.getOBContext().getCurrentClient());
        * product.setOrganization(organization); product.setActive(true); product.setCreationDate(new
@@ -140,7 +178,7 @@ public class CloseProInvHandler extends DalBaseProcess {
       OBError ob = new OBError();
       ob.setType(SUCCESS);
       ob.setTitle("نجاح");
-      ob.setMessage("تم التحويل الى المخزن التام");
+      ob.setMessage("تم اغلاق الفترة بنجاح");
       bundle.setResult(ob);
 
     } catch (Exception e) {

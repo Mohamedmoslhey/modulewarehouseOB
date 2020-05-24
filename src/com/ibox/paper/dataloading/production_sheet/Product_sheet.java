@@ -6,7 +6,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -16,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.fileupload.FileItem;
 import org.hibernate.criterion.Expression;
+import org.hibernate.query.Query;
 import org.openbravo.base.secureApp.HttpSecureAppServlet;
 import org.openbravo.base.secureApp.VariablesSecureApp;
 import org.openbravo.dal.core.OBContext;
@@ -27,6 +30,7 @@ import org.openbravo.erpCommon.utility.NavigationBar;
 import org.openbravo.erpCommon.utility.OBError;
 import org.openbravo.erpCommon.utility.ToolBar;
 import org.openbravo.model.common.businesspartner.BusinessPartner;
+import org.openbravo.model.financialmgmt.calendar.Period;
 import org.openbravo.xmlEngine.XmlDocument;
 
 import com.ibox.paper.data.PaperEmployee;
@@ -241,9 +245,25 @@ public class Product_sheet extends HttpSecureAppServlet {
 
         String notes = sheet.getCell(45, x).getContents(); //
         String datotimo = sheet.getCell(46, x).getContents(); //
+        DateFormat formate = new SimpleDateFormat("dd-MM-yyyy");
 
+        Date datePro = formate.parse(datotimo);
         // end of excel
+        List<Period> periodList = new ArrayList<Period>();
+        String priodSql = "select h from FinancialMgmtPeriod h  where h.client=:client and "
+            + "h.openClose ='C'";
 
+        Query periodQuery = OBDal.getInstance().getSession().createQuery(priodSql);
+        periodQuery.setParameter("client", OBContext.getOBContext().getCurrentClient());
+        periodList = periodQuery.list();
+        for (Period mPeriod : periodList) {
+          if ((mPeriod.getStartingDate().equals(datePro)
+              || mPeriod.getStartingDate().after(datePro))
+              && (mPeriod.getEndingDate().equals(datePro)
+                  || mPeriod.getEndingDate().before(datePro))) {
+            throw new Exception("تم اغلاق هذة الفترة لايمكن ادخال البكرة !!!" + bakaracode);
+          }
+        }
         // ---check if code inserted before-----
         OBCriteria<ProductionQuality> ProductionQualityCriteria = OBDal.getInstance()
             .createCriteria(ProductionQuality.class);
