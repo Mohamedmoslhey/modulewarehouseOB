@@ -8,6 +8,8 @@ import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -245,9 +247,13 @@ public class Product_sheet extends HttpSecureAppServlet {
 
         String notes = sheet.getCell(45, x).getContents(); //
         String datotimo = sheet.getCell(46, x).getContents(); //
+
         DateFormat formate = new SimpleDateFormat("dd-MM-yyyy");
 
         Date datePro = formate.parse(datotimo);
+        LocalDate localDate = LocalDate.parse(datotimo.substring(0, 10),
+            DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+
         // end of excel
         List<Period> periodList = new ArrayList<Period>();
         String priodSql = "select h from FinancialMgmtPeriod h  where h.client=:client and "
@@ -257,10 +263,12 @@ public class Product_sheet extends HttpSecureAppServlet {
         periodQuery.setParameter("client", OBContext.getOBContext().getCurrentClient());
         periodList = periodQuery.list();
         for (Period mPeriod : periodList) {
-          if ((mPeriod.getStartingDate().equals(datePro)
-              || mPeriod.getStartingDate().after(datePro))
-              && (mPeriod.getEndingDate().equals(datePro)
-                  || mPeriod.getEndingDate().before(datePro))) {
+          LocalDate localStart = LocalDate.parse(
+              mPeriod.getStartingDate().toString().substring(0, 10),
+              DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+          LocalDate localEnd = LocalDate.parse(mPeriod.getEndingDate().toString().substring(0, 10),
+              DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+          if (localDate.isAfter(localStart) && localDate.isBefore(localEnd)) {
             throw new Exception("تم اغلاق هذة الفترة لايمكن ادخال البكرة !!!" + bakaracode);
           }
         }
